@@ -62,6 +62,7 @@ namespace Lessons
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -96,7 +97,8 @@ namespace Lessons
             this.FileToolStripMenuItem,
             this.PravkaToolStripMenuItem,
             this.VidToolStripMenuItem,
-            this.FontToolStripMenuItem});
+            this.FontToolStripMenuItem,
+            this.ReferenceToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -119,14 +121,14 @@ namespace Lessons
             // CreateToolStripMenuItem
             // 
             this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.CreateToolStripMenuItem.Text = "Создание";
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
             this.OpenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.OpenToolStripMenuItem.Text = "Открыть";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -134,7 +136,7 @@ namespace Lessons
             // 
             this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
             this.SaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.SaveToolStripMenuItem.Text = "Сохранить";
             this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
@@ -143,21 +145,21 @@ namespace Lessons
             this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
             this.SaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.SaveAsToolStripMenuItem.Text = "Сохранить как";
             this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // PrintToolStripMenuItem
             // 
             this.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem";
-            this.PrintToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.PrintToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.PrintToolStripMenuItem.Text = "Печать";
             this.PrintToolStripMenuItem.Click += new System.EventHandler(this.PrintToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -247,6 +249,7 @@ namespace Lessons
             // FindToolStripMenuItem
             // 
             this.FindToolStripMenuItem.Name = "FindToolStripMenuItem";
+            this.FindToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
             this.FindToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.FindToolStripMenuItem.Text = "Найти";
             this.FindToolStripMenuItem.Click += new System.EventHandler(this.FindToolStripMenuItem_Click);
@@ -254,6 +257,7 @@ namespace Lessons
             // SearchToolStripMenuItem
             // 
             this.SearchToolStripMenuItem.Name = "SearchToolStripMenuItem";
+            this.SearchToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.H)));
             this.SearchToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.SearchToolStripMenuItem.Text = "Заменить";
             this.SearchToolStripMenuItem.Click += new System.EventHandler(this.SearchToolStripMenuItem_Click);
@@ -261,8 +265,10 @@ namespace Lessons
             // GoToToolStripMenuItem
             // 
             this.GoToToolStripMenuItem.Name = "GoToToolStripMenuItem";
+            this.GoToToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.G)));
             this.GoToToolStripMenuItem.Size = new System.Drawing.Size(191, 22);
             this.GoToToolStripMenuItem.Text = "Перейти";
+            this.GoToToolStripMenuItem.Click += new System.EventHandler(this.GoToToolStripMenuItem_Click);
             // 
             // VidToolStripMenuItem
             // 
@@ -276,14 +282,14 @@ namespace Lessons
             // строкаСостоянияToolStripMenuItem
             // 
             this.строкаСостоянияToolStripMenuItem.Name = "строкаСостоянияToolStripMenuItem";
-            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
+            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.строкаСостоянияToolStripMenuItem.Text = "Строка состояния";
             // 
             // ReadOnlyToolStripMenuItem
             // 
             this.ReadOnlyToolStripMenuItem.Name = "ReadOnlyToolStripMenuItem";
-            this.ReadOnlyToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
-            this.ReadOnlyToolStripMenuItem.Text = "Только для чтения";
+            this.ReadOnlyToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.ReadOnlyToolStripMenuItem.Text = "Запретить редактирование";
             this.ReadOnlyToolStripMenuItem.Click += new System.EventHandler(this.ReadOnlyToolStripMenuItem_Click);
             // 
             // FontToolStripMenuItem
@@ -321,6 +327,13 @@ namespace Lessons
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // ReferenceToolStripMenuItem
+            // 
+            this.ReferenceToolStripMenuItem.Name = "ReferenceToolStripMenuItem";
+            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.ReferenceToolStripMenuItem.Text = "Справка";
+            this.ReferenceToolStripMenuItem.Click += new System.EventHandler(this.ReferenceToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -378,6 +391,7 @@ namespace Lessons
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem FontToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.ToolStripMenuItem ReferenceToolStripMenuItem;
     }
 }
 

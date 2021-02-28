@@ -140,17 +140,29 @@ namespace Lessons
 
         private void ReadOnlyToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileText.ReadOnly = !FileText.ReadOnly;
+            if (FileText.ReadOnly)
+            {
+                FileText.ReadOnly = false;
+                ReadOnlyToolStripMenuItem.Text = "Запретить редактирование";
+            }
+            else
+            {
+                FileText.ReadOnly = true;
+                ReadOnlyToolStripMenuItem.Text = "Разрешить редактирование";
+            }
         }
 
         private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FormFind searchForm = new FormFind();
+            searchForm.Owner = this;
+            searchForm.ShowDialog();
         }
 
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            SearchForm search = new SearchForm();
+            search.ShowDialog();
         }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
@@ -188,6 +200,22 @@ namespace Lessons
                     e.Cancel = true;
                 }
             }
+        }
+
+        private void GoToToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            GoToForm gotoform = new GoToForm();
+            gotoform.Owner = this;
+            gotoform.NumbLine.Minimum = 0;
+            gotoform.NumbLine.Maximum = FileText.Lines.Count();
+            gotoform.textFind = FileText;
+            gotoform.ShowDialog();
+        }
+
+        private void ReferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Reference reference = new Reference();
+            reference.ShowDialog();
         }
     }
 }
