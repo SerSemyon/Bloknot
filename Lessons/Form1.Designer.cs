@@ -119,14 +119,14 @@ namespace Lessons
             // CreateToolStripMenuItem
             // 
             this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.CreateToolStripMenuItem.Text = "Создание";
             // 
             // OpenToolStripMenuItem
             // 
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
             this.OpenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.OpenToolStripMenuItem.Text = "Открыть";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -134,7 +134,7 @@ namespace Lessons
             // 
             this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
             this.SaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.SaveToolStripMenuItem.Text = "Сохранить";
             this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
@@ -143,21 +143,21 @@ namespace Lessons
             this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
             this.SaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.SaveAsToolStripMenuItem.Text = "Сохранить как";
             this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // PrintToolStripMenuItem
             // 
             this.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem";
-            this.PrintToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.PrintToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.PrintToolStripMenuItem.Text = "Печать";
             this.PrintToolStripMenuItem.Click += new System.EventHandler(this.PrintToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -276,13 +276,13 @@ namespace Lessons
             // строкаСостоянияToolStripMenuItem
             // 
             this.строкаСостоянияToolStripMenuItem.Name = "строкаСостоянияToolStripMenuItem";
-            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.строкаСостоянияToolStripMenuItem.Text = "Строка состояния";
             // 
             // ReadOnlyToolStripMenuItem
             // 
             this.ReadOnlyToolStripMenuItem.Name = "ReadOnlyToolStripMenuItem";
-            this.ReadOnlyToolStripMenuItem.Size = new System.Drawing.Size(177, 22);
+            this.ReadOnlyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.ReadOnlyToolStripMenuItem.Text = "Только для чтения";
             this.ReadOnlyToolStripMenuItem.Click += new System.EventHandler(this.ReadOnlyToolStripMenuItem_Click);
             // 
@@ -320,8 +320,7 @@ namespace Lessons
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(118, 17);
-            this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
             // 
             // Form1
             // 

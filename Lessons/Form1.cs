@@ -13,12 +13,12 @@ namespace Lessons
     public partial class Form1 : Form
     {
         string fileName;
+        int line;
         public Form1()
         {
             InitializeComponent();
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
-            toolStripStatusLabel1.Text = "Blabla";
         }
 
 
@@ -37,7 +37,8 @@ namespace Lessons
 
         private void FileText_TextChanged(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "Строка " + FileText.GetLineFromCharIndex(FileText.SelectionStart) + " Столбец ";
+            line = 1+Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
+            toolStripStatusLabel1.Text = "Строка " + line + " Столбец ";
         }
 
 
