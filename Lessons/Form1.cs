@@ -14,6 +14,7 @@ namespace Lessons
     {
         string fileName;
         int line;
+        bool haveChanges;
         public Form1()
         {
             InitializeComponent();
@@ -33,12 +34,14 @@ namespace Lessons
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
             fileName = openFileDialog1.FileName;
             FileText.Text = System.IO.File.ReadAllText(fileName);
+            haveChanges = false;
         }
 
         private void FileText_TextChanged(object sender, EventArgs e)
         {
             line = 1+Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
             toolStripStatusLabel1.Text = "Строка " + line + " Столбец ";
+            haveChanges = true;
         }
 
 
@@ -54,6 +57,7 @@ namespace Lessons
                 fileName = saveFileDialog1.FileName;
                 System.IO.File.WriteAllText(fileName, FileText.Text);
             }
+            haveChanges = false;
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,6 +65,7 @@ namespace Lessons
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
             fileName = saveFileDialog1.FileName;
             System.IO.File.WriteAllText(fileName, FileText.Text);
+            haveChanges = false;
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -157,6 +162,32 @@ namespace Lessons
         {
             if (fontDialog1.ShowDialog() == DialogResult.Cancel) return;
             FileText.Font = fontDialog1.Font;
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (haveChanges == true)
+            {
+                DialogResult message = MessageBox.Show("Сохранить текущий документ перед выходом?", "Выход из программы", MessageBoxButtons.YesNoCancel);
+                if (message == DialogResult.Yes)
+                {
+                    try
+                    {
+                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                    }
+                    catch
+                    {
+                        if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
+                        fileName = saveFileDialog1.FileName;
+                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                    }
+                    haveChanges = false;
+                }
+                else if (message == DialogResult.Cancel)
+                {
+                    e.Cancel = true;
+                }
+            }
         }
     }
 }

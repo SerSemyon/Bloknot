@@ -276,13 +276,13 @@ namespace Lessons
             // строкаСостоянияToolStripMenuItem
             // 
             this.строкаСостоянияToolStripMenuItem.Name = "строкаСостоянияToolStripMenuItem";
-            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.строкаСостоянияToolStripMenuItem.Text = "Строка состояния";
             // 
             // ReadOnlyToolStripMenuItem
             // 
             this.ReadOnlyToolStripMenuItem.Name = "ReadOnlyToolStripMenuItem";
-            this.ReadOnlyToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.ReadOnlyToolStripMenuItem.Size = new System.Drawing.Size(176, 22);
             this.ReadOnlyToolStripMenuItem.Text = "Только для чтения";
             this.ReadOnlyToolStripMenuItem.Click += new System.EventHandler(this.ReadOnlyToolStripMenuItem_Click);
             // 
@@ -332,6 +332,7 @@ namespace Lessons
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "яЕстьБлокнот";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
