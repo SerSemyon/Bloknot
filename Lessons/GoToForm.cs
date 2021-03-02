@@ -25,7 +25,8 @@ namespace Lessons
 
         private void buttonGo_Click(object sender, EventArgs e)
         {
-            textFind.Select(Convert.ToInt32(NumbLine.Value), 0);
+            textFind.SelectionStart = textFind.GetFirstCharIndexFromLine(Convert.ToInt32(NumbLine.Text) - 1);
+            textFind.ScrollToCaret();
             this.Close();
         }
     }
