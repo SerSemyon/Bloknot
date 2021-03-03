@@ -156,6 +156,7 @@ namespace Lessons
         {
             FormFind searchForm = new FormFind();
             searchForm.Owner = this;
+            searchForm.richText = FileText;
             searchForm.ShowDialog();
         }
 
@@ -242,6 +243,7 @@ namespace Lessons
                 {
                     FileText.Text = "";
                 }
+                FileText.Text = "";
             }
         }
     }
