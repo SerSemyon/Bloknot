@@ -217,5 +217,32 @@ namespace Lessons
             Reference reference = new Reference();
             reference.ShowDialog();
         }
+
+        private void CreateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (haveChanges == true)
+            {
+                DialogResult message = MessageBox.Show("Сохранить текущий документ перед выходом?", "Файл не сохранён", MessageBoxButtons.YesNoCancel);
+                if (message == DialogResult.Yes)
+                {
+                    try
+                    {
+                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                    }
+                    catch
+                    {
+                        if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
+                        fileName = saveFileDialog1.FileName;
+                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                    }
+                    haveChanges = false;
+                    FileText.Text = "";
+                }
+                else if (message == DialogResult.No)
+                {
+                    FileText.Text = "";
+                }
+            }
+        }
     }
 }
