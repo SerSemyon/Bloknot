@@ -163,6 +163,7 @@ namespace Lessons
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SearchForm search = new SearchForm();
+            search.richText = FileText;
             search.ShowDialog();
         }
 
