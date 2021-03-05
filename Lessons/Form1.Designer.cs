@@ -64,6 +64,7 @@ namespace Lessons
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.EncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -71,7 +72,7 @@ namespace Lessons
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png";
+            this.openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             this.openFileDialog1.Title = "Открыть .txt файл";
             this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
@@ -99,7 +100,8 @@ namespace Lessons
             this.PravkaToolStripMenuItem,
             this.VidToolStripMenuItem,
             this.FontToolStripMenuItem,
-            this.ReferenceToolStripMenuItem});
+            this.ReferenceToolStripMenuItem,
+            this.EncodingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
@@ -122,7 +124,7 @@ namespace Lessons
             // CreateToolStripMenuItem
             // 
             this.CreateToolStripMenuItem.Name = "CreateToolStripMenuItem";
-            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.CreateToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.CreateToolStripMenuItem.Text = "Создание";
             this.CreateToolStripMenuItem.Click += new System.EventHandler(this.CreateToolStripMenuItem_Click);
             // 
@@ -130,7 +132,7 @@ namespace Lessons
             // 
             this.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem";
             this.OpenToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.OpenToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.OpenToolStripMenuItem.Text = "Открыть";
             this.OpenToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -138,7 +140,7 @@ namespace Lessons
             // 
             this.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem";
             this.SaveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.SaveToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.SaveToolStripMenuItem.Text = "Сохранить";
             this.SaveToolStripMenuItem.Click += new System.EventHandler(this.SaveToolStripMenuItem_Click);
             // 
@@ -147,21 +149,21 @@ namespace Lessons
             this.SaveAsToolStripMenuItem.Name = "SaveAsToolStripMenuItem";
             this.SaveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.SaveAsToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.SaveAsToolStripMenuItem.Text = "Сохранить как";
             this.SaveAsToolStripMenuItem.Click += new System.EventHandler(this.SaveAsToolStripMenuItem_Click);
             // 
             // PrintToolStripMenuItem
             // 
             this.PrintToolStripMenuItem.Name = "PrintToolStripMenuItem";
-            this.PrintToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.PrintToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.PrintToolStripMenuItem.Text = "Печать";
             this.PrintToolStripMenuItem.Click += new System.EventHandler(this.PrintToolStripMenuItem_Click);
             // 
             // ExitToolStripMenuItem
             // 
             this.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem";
-            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(225, 22);
+            this.ExitToolStripMenuItem.Size = new System.Drawing.Size(226, 22);
             this.ExitToolStripMenuItem.Text = "Выход";
             this.ExitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -320,6 +322,10 @@ namespace Lessons
             this.FileText.SelectionChanged += new System.EventHandler(this.FileText_SelectionChanged);
             this.FileText.TextChanged += new System.EventHandler(this.FileText_TextChanged);
             // 
+            // saveFileDialog1
+            // 
+            this.saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+            // 
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
@@ -342,6 +348,13 @@ namespace Lessons
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // EncodingToolStripMenuItem
+            // 
+            this.EncodingToolStripMenuItem.Name = "EncodingToolStripMenuItem";
+            this.EncodingToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.EncodingToolStripMenuItem.Text = "Смена кодировки";
+            this.EncodingToolStripMenuItem.Click += new System.EventHandler(this.EncodingToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -401,6 +414,7 @@ namespace Lessons
         private System.Windows.Forms.ToolStripMenuItem FontToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
         private System.Windows.Forms.ToolStripMenuItem ReferenceToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem EncodingToolStripMenuItem;
     }
 }
 

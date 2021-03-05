@@ -24,8 +24,6 @@ namespace Lessons
         public Form1()
         {
             InitializeComponent();
-            openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
-            saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
         }
         public Form1(string[] args) : this()
         {
@@ -43,11 +41,15 @@ namespace Lessons
                         filePath = "";
                         ChangeStripStatus();
                     }
-                    else
+                    else if (message == DialogResult.Yes)
                     {
                         this.Text = fileName + " - Блокнотик";
                         FileText.Text = System.IO.File.ReadAllText(filePath);
                         ChangeStripStatus();
+                    }
+                    else
+                    {
+                        this.Close();
                     }
                 }
                 else
@@ -346,6 +348,11 @@ namespace Lessons
         private void FileText_SelectionChanged(object sender, EventArgs e)
         {
             ChangeStripStatus();
+        }
+
+        private void EncodingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
