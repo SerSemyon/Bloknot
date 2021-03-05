@@ -17,16 +17,20 @@ namespace Lessons
         {
             InitializeComponent();
         }
+        void ChangeText()
+        {
+            int index = richText.Text.IndexOf(textBox1.Text);
+            int lengthBegin = richText.Text.Length - textBox1.Text.Length - index;
+            string strBegin = richText.Text.Substring(0, index);
+            string strEnd = richText.Text.Substring(index + textBox1.Text.Length, lengthBegin);
+            richText.Text = strBegin + textBox2.Text + strEnd;
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int index = richText.Text.IndexOf(textBox1.Text);
             try
             {
-                int lengthBegin = richText.Text.Length - textBox1.Text.Length -index;
-                string strBegin = richText.Text.Substring(0, index);
-                string strEnd = richText.Text.Substring(index + textBox1.Text.Length, lengthBegin);
-                richText.Text = strBegin + textBox2.Text + strEnd;
+                ChangeText();
             }
             catch
             {
@@ -42,6 +46,21 @@ namespace Lessons
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            while(true)
+            {
+                try
+                {
+                    ChangeText();
+                }
+                catch
+                {
+                    return;
+                }
+            }
         }
     }
 
