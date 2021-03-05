@@ -14,6 +14,8 @@ namespace Lessons
     {
         string fileName;
         int line;
+        int indexInLine;
+        bool enableStatusSrip = true;
         bool haveChanges;
         public Form1()
         {
@@ -38,7 +40,8 @@ namespace Lessons
         private void FileText_TextChanged(object sender, EventArgs e)
         {
             line = 1+Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
-            toolStripStatusLabel1.Text = "Строка " + line + " Столбец ";
+            indexInLine = 1+Convert.ToInt32(FileText.SelectionStart) - Convert.ToInt32(FileText.GetFirstCharIndexFromLine(line-1));
+            toolStripStatusLabel1.Text = "Строка " + line + " Столбец " + indexInLine;
             haveChanges = true;
         }
 
@@ -244,6 +247,24 @@ namespace Lessons
                     FileText.Text = "";
                 }
                 FileText.Text = "";
+            }
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            e.Graphics.DrawString(FileText.Text, FileText.Font, Brushes.Black, 0, 0);
+        }
+
+        private void enableStatusStringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (enableStatusSrip) {
+                statusStrip1.Hide();
+                enableStatusSrip = false;
+            }
+            else
+            {
+                statusStrip1.Show();
+                enableStatusSrip = true;
             }
         }
     }

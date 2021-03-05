@@ -52,7 +52,7 @@ namespace Lessons
             this.SearchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.GoToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.строкаСостоянияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enableStatusStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReadOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -274,17 +274,18 @@ namespace Lessons
             // VidToolStripMenuItem
             // 
             this.VidToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.строкаСостоянияToolStripMenuItem,
+            this.enableStatusStringToolStripMenuItem,
             this.ReadOnlyToolStripMenuItem});
             this.VidToolStripMenuItem.Name = "VidToolStripMenuItem";
             this.VidToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
             this.VidToolStripMenuItem.Text = "Настройки";
             // 
-            // строкаСостоянияToolStripMenuItem
+            // enableStatusStringToolStripMenuItem
             // 
-            this.строкаСостоянияToolStripMenuItem.Name = "строкаСостоянияToolStripMenuItem";
-            this.строкаСостоянияToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.строкаСостоянияToolStripMenuItem.Text = "Строка состояния";
+            this.enableStatusStringToolStripMenuItem.Name = "enableStatusStringToolStripMenuItem";
+            this.enableStatusStringToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.enableStatusStringToolStripMenuItem.Text = "Строка состояния";
+            this.enableStatusStringToolStripMenuItem.Click += new System.EventHandler(this.enableStatusStringToolStripMenuItem_Click);
             // 
             // ReadOnlyToolStripMenuItem
             // 
@@ -320,6 +321,10 @@ namespace Lessons
             // printDialog1
             // 
             this.printDialog1.UseEXDialog = true;
+            // 
+            // printDocument1
+            // 
+            this.printDocument1.PrintPage += new System.Drawing.Printing.PrintPageEventHandler(this.printDocument1_PrintPage);
             // 
             // statusStrip1
             // 
@@ -376,7 +381,7 @@ namespace Lessons
         private System.Windows.Forms.ToolStripMenuItem CutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem DeleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem SelectAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem строкаСостоянияToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem enableStatusStringToolStripMenuItem;
         private System.Windows.Forms.RichTextBox FileText;
         private System.Windows.Forms.ToolStripMenuItem TimeToolStripMenuItem;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
