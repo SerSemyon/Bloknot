@@ -21,8 +21,6 @@ namespace Lessons
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
         }
-
-
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
@@ -164,7 +162,8 @@ namespace Lessons
         {
             SearchForm search = new SearchForm();
             search.richText = FileText;
-            search.ShowDialog();
+            search.Owner = this;
+            search.Show();
         }
 
         private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)

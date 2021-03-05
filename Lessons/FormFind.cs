@@ -65,18 +65,6 @@ namespace Lessons
         {
             
             FindTextBox(ref richText, textBox1.Text, ref oldIndex);
-
-            /*oldIndex += nextText.IndexOf(nextText);
-            nextText = nextText.Remove(textBox1.Text.Length, nextText.IndexOf(nextText));
-            if (richText.Text.Contains(textBox1.Text))
-            {
-                int index = richText.Text.IndexOf(textBox1.Text+oldIndex);
-                richText.Select(index, textBox1.Text.Length);
-            }
-            else
-            {
-                MessageBox.Show("Не найдено");
-            }*/
         }
     }
 }

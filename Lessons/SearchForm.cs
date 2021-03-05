@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Lessons
 {
-        public partial class SearchForm : Form
+    public partial class SearchForm : Form
     {
         public RichTextBox richText;
         public SearchForm()
@@ -20,13 +20,13 @@ namespace Lessons
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int index = textBox1.Text.IndexOf(richText.Text);
+            int index = richText.Text.IndexOf(textBox1.Text);
             try
             {
+                int lengthBegin = richText.Text.Length - textBox1.Text.Length -index;
                 string strBegin = richText.Text.Substring(0, index);
-                string strEnd = richText.Text.Substring(index + textBox1.Text.Length, richText.Text.Length - (index + textBox1.Text.Length));
-                richText.Text = strBegin + strEnd;
-                this.Owner.Focus();
+                string strEnd = richText.Text.Substring(index + textBox1.Text.Length, lengthBegin);
+                richText.Text = strBegin + textBox2.Text + strEnd;
             }
             catch
             {
