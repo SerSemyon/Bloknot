@@ -26,7 +26,7 @@ namespace Lessons
                 string strBegin = richText.Text.Substring(0, index);
                 string strEnd = richText.Text.Substring(index + textBox1.Text.Length, richText.Text.Length - (index + textBox1.Text.Length));
                 richText.Text = strBegin + strEnd;
-
+                this.Owner.Focus();
             }
             catch
             {

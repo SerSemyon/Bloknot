@@ -157,7 +157,7 @@ namespace Lessons
             FormFind searchForm = new FormFind();
             searchForm.Owner = this;
             searchForm.richText = FileText;
-            searchForm.ShowDialog();
+            searchForm.Show();
         }
 
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
