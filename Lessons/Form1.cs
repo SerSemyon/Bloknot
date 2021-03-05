@@ -39,13 +39,11 @@ namespace Lessons
                     if (message == DialogResult.No)
                     {
                         filePath = "";
-                        ChangeStripStatus();
                     }
                     else if (message == DialogResult.Yes)
                     {
                         this.Text = fileName + " - Блокнотик";
                         FileText.Text = System.IO.File.ReadAllText(filePath);
-                        ChangeStripStatus();
                     }
                     else
                     {
@@ -56,14 +54,12 @@ namespace Lessons
                 {
                     this.Text = fileName + " - Блокнотик";
                     FileText.Text = System.IO.File.ReadAllText(filePath);
-                    ChangeStripStatus();
                 }
             }
             catch 
             {
                 fileName = "Новый текстовый документ";
                 this.Text = fileName + " - Блокнотик";
-                ChangeStripStatus();
             }
         }
         public void ChangeText(string newText)
@@ -71,12 +67,6 @@ namespace Lessons
             pastText = FileText.Text;
             FileText.Text = newText;
             haveChangesText = 1;
-        }
-        void ChangeStripStatus()
-        {
-            line = 1 + Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
-            indexInLine = 1 + Convert.ToInt32(FileText.SelectionStart) - Convert.ToInt32(FileText.GetFirstCharIndexFromLine(line - 1));
-            toolStripStatusLabel1.Text = "Строка " + line + " Столбец " + indexInLine;
         }
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -119,7 +109,6 @@ namespace Lessons
 
         private void FileText_TextChanged(object sender, EventArgs e)
         {
-            ChangeStripStatus();
             haveChangesFile = true;
             haveChangesText = 0;
         }
@@ -347,7 +336,9 @@ namespace Lessons
 
         private void FileText_SelectionChanged(object sender, EventArgs e)
         {
-            ChangeStripStatus();
+            line = 1 + Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
+            indexInLine = 1 + Convert.ToInt32(FileText.SelectionStart) - Convert.ToInt32(FileText.GetFirstCharIndexFromLine(line - 1));
+            toolStripStatusLabel1.Text = "Строка " + line + " Столбец " + indexInLine;
         }
 
         private void EncodingToolStripMenuItem_Click(object sender, EventArgs e)
