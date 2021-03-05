@@ -24,9 +24,57 @@ namespace Lessons
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
         }
+        public Form1(string[] args) : this()
+        {
+            try
+            {
+                filePath = args[0];
+                string[] wholeFilePath = filePath.Split('\\');
+                string[] lastPath = wholeFilePath[wholeFilePath.Length - 1].Split('.');
+                fileName = lastPath[0];
+                if (lastPath[lastPath.Length - 1] != "txt")
+                {
+                    MessageBox.Show("Данный формат файла не поддерживается программой");
+                    filePath = "";
+                }
+                else
+                {
+                    this.Text = fileName + " - Блокнотик";
+                    FileText.Text = System.IO.File.ReadAllText(filePath);
+                }
+            }
+            catch 
+            {
+                fileName = "Новый текстовый документ";
+                this.Text = fileName + " - Блокнотик";
+            }
+        }
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
 
+        }
+
+        void SaveFile()
+        {
+            try
+            {
+                System.IO.File.WriteAllText(filePath, FileText.Text);
+                haveChanges = false;
+            }
+            catch
+            {
+                SaveAs();
+            }
+        }
+        void SaveAs()
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
+            filePath = saveFileDialog1.FileName;
+            string[] wholeFilePath = saveFileDialog1.FileName.Split('\\');
+            fileName = wholeFilePath[wholeFilePath.Length - 1].Split('.')[0];
+            this.Text = fileName + " - Блокнотик";
+            System.IO.File.WriteAllText(filePath, FileText.Text);
+            haveChanges = false;
         }
 
 
@@ -51,31 +99,12 @@ namespace Lessons
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            try
-            {
-                System.IO.File.WriteAllText(filePath, FileText.Text);
-            }
-            catch
-            {
-                if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-                filePath = saveFileDialog1.FileName;
-                string[] wholeFilePath = saveFileDialog1.FileName.Split('\\');
-                fileName = wholeFilePath[wholeFilePath.Length - 1].Split('.')[0];
-                this.Text = fileName + " - Блокнотик";
-                System.IO.File.WriteAllText(filePath, FileText.Text);
-            }
-            haveChanges = false;
+            SaveFile();
         }
 
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-            filePath = saveFileDialog1.FileName;
-            string[] wholeFilePath = saveFileDialog1.FileName.Split('\\');
-            fileName = wholeFilePath[wholeFilePath.Length-1].Split('.')[0];
-            this.Text = fileName + " - Блокнотик";
-            System.IO.File.WriteAllText(filePath, FileText.Text);
-            haveChanges = false;
+            SaveAs();
         }
 
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -195,17 +224,7 @@ namespace Lessons
                 DialogResult message = MessageBox.Show("Сохранить текущий документ перед выходом?", "Выход из программы", MessageBoxButtons.YesNoCancel);
                 if (message == DialogResult.Yes)
                 {
-                    try
-                    {
-                        System.IO.File.WriteAllText(filePath, FileText.Text);
-                    }
-                    catch
-                    {
-                        if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-                        filePath = saveFileDialog1.FileName;
-                        System.IO.File.WriteAllText(filePath, FileText.Text);
-                    }
-                    haveChanges = false;
+                    SaveFile();
                 }
                 else if (message == DialogResult.Cancel)
                 {
@@ -257,6 +276,13 @@ namespace Lessons
                     this.Text = fileName + " - Блокнотик";
                 }
             }
+            else
+            {
+                fileName = "Новый текстовый документ";
+                filePath = "";
+                FileText.Text = "";
+                this.Text = fileName + " - Блокнотик";
+            }
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
@@ -275,6 +301,11 @@ namespace Lessons
                 statusStrip1.Show();
                 enableStatusSrip = true;
             }
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
