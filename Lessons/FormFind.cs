@@ -12,41 +12,14 @@ namespace Lessons
 {
     public partial class FormFind : Form
     {
-        public RichTextBox richText;
-        public static int FindTextBox(ref RichTextBox textBox, string findText, ref int findCutLength)
+        RichTextBox richText;
+        string lastText;
+        int oldIndex =0;
+        int index = 0;
+        public FormFind(RichTextBox richBox)
         {
-            if (textBox.Text.ToLower().Contains(findText.ToLower()))
-            {
-                string text = textBox.Text.ToLower();
-                string nextText = text.Remove(0, findCutLength);
-                int resultPosition = nextText.IndexOf(findText.ToLower());
-
-                if (resultPosition != -1)
-                {
-                    textBox.Select(resultPosition + findCutLength, findText.Length);
-                    textBox.ScrollToCaret();
-                    textBox.Focus();
-                    findCutLength += findText.Length + resultPosition;
-                }
-                else if (resultPosition == -1 && findCutLength != 0)
-                {
-                    findCutLength = 0;
-                    return FindTextBox(ref textBox, findText, ref findCutLength);
-                }
-            }
-            else
-            {
-                findCutLength = 0;
-                MessageBox.Show("Совпадений не найдено", "Не найдено", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-
-            return 0;
-        }
-        string nextText = "";
-        int oldIndex = 0;
-        public FormFind()
-        {
+            richText = richBox;
+            lastText = richText.Text;
             InitializeComponent();
         }
 
@@ -57,14 +30,42 @@ namespace Lessons
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
-            nextText = richText.Text;
+            lastText = richText.Text;
+            oldIndex = 0;
+        }
+        void findText()
+        {
+            try
+            {
+                if (oldIndex != 0)
+                lastText = richText.Text.Remove(0, index + textBox1.Text.Length);
+                index = lastText.IndexOf(textBox1.Text);
+                if (index != -1)
+                {
+                    index += oldIndex;
+                    richText.Select(index, textBox1.Text.Length);
+                    oldIndex = index + textBox1.Text.Length;
+                    this.Owner.Focus();
+                }
+                else throw new Exception();
+            }
+            catch
+            {
+                if (oldIndex == 0)
+                    MessageBox.Show("Не найдено");
+                else
+                {
+                    lastText = richText.Text;
+                    oldIndex = 0;
+                    findText();
+                }
+                    
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-            FindTextBox(ref richText, textBox1.Text, ref oldIndex);
+            findText();
         }
     }
 }

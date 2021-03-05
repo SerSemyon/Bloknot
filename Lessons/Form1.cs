@@ -164,9 +164,8 @@ namespace Lessons
 
         private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormFind searchForm = new FormFind();
+            FormFind searchForm = new FormFind(FileText);
             searchForm.Owner = this;
-            searchForm.richText = FileText;
             searchForm.Show();
         }
 
