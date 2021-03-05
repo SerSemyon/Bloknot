@@ -29,6 +29,7 @@ namespace Lessons
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Reference));
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -47,8 +48,9 @@ namespace Lessons
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(341, 55);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Reference";
-            this.Text = "Reference";
+            this.Text = "Справка о программе";
             this.ResumeLayout(false);
             this.PerformLayout();
 

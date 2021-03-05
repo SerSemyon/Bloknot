@@ -1,0 +1,14 @@
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.csprojAssemblyReference.cache
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.csproj.GenerateResource.cache
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.csproj.CoreCompileInputs.cache
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.Form1.resources
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.GoToForm.resources
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.SearchForm.resources
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.Reference.resources
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Lessons.FormFind.resources
+C:\Users\Blablak\source\repos\Lessons\Lessons\bin\Debug\Блокнотик.exe.config
+C:\Users\Blablak\source\repos\Lessons\Lessons\bin\Debug\Блокнотик.exe
+C:\Users\Blablak\source\repos\Lessons\Lessons\bin\Debug\Блокнотик.pdb
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Блокнотик.exe
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Блокнотик.pdb
+C:\Users\Blablak\source\repos\Lessons\Lessons\obj\Debug\Блокнотик.Properties.Resources.resources

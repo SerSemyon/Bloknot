@@ -29,6 +29,7 @@ namespace Lessons
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GoToForm));
             this.buttonGo = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.NumbLine = new System.Windows.Forms.NumericUpDown();
@@ -70,8 +71,9 @@ namespace Lessons
             this.Controls.Add(this.NumbLine);
             this.Controls.Add(this.buttonCancel);
             this.Controls.Add(this.buttonGo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "GoToForm";
-            this.Text = "GoToForm";
+            this.Text = "Перейти к строке";
             ((System.ComponentModel.ISupportInitialize)(this.NumbLine)).EndInit();
             this.ResumeLayout(false);
 

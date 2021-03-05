@@ -12,6 +12,7 @@ namespace Lessons
 {
     public partial class Form1 : Form
     {
+        string filePath;
         string fileName;
         int line;
         int indexInLine;
@@ -32,8 +33,10 @@ namespace Lessons
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-            fileName = openFileDialog1.FileName;
-            FileText.Text = System.IO.File.ReadAllText(fileName);
+            filePath = openFileDialog1.FileName;
+            FileText.Text = System.IO.File.ReadAllText(filePath);
+            fileName = openFileDialog1.SafeFileName.Split('.')[0];
+            this.Text = fileName + " - Блокнотик";
             haveChanges = false;
         }
 
@@ -50,13 +53,16 @@ namespace Lessons
         {
             try
             {
-                System.IO.File.WriteAllText(fileName, FileText.Text);
+                System.IO.File.WriteAllText(filePath, FileText.Text);
             }
             catch
             {
                 if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-                fileName = saveFileDialog1.FileName;
-                System.IO.File.WriteAllText(fileName, FileText.Text);
+                filePath = saveFileDialog1.FileName;
+                string[] wholeFilePath = saveFileDialog1.FileName.Split('\\');
+                fileName = wholeFilePath[wholeFilePath.Length - 1].Split('.')[0];
+                this.Text = fileName + " - Блокнотик";
+                System.IO.File.WriteAllText(filePath, FileText.Text);
             }
             haveChanges = false;
         }
@@ -64,8 +70,11 @@ namespace Lessons
         private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-            fileName = saveFileDialog1.FileName;
-            System.IO.File.WriteAllText(fileName, FileText.Text);
+            filePath = saveFileDialog1.FileName;
+            string[] wholeFilePath = saveFileDialog1.FileName.Split('\\');
+            fileName = wholeFilePath[wholeFilePath.Length-1].Split('.')[0];
+            this.Text = fileName + " - Блокнотик";
+            System.IO.File.WriteAllText(filePath, FileText.Text);
             haveChanges = false;
         }
 
@@ -189,13 +198,13 @@ namespace Lessons
                 {
                     try
                     {
-                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                        System.IO.File.WriteAllText(filePath, FileText.Text);
                     }
                     catch
                     {
                         if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-                        fileName = saveFileDialog1.FileName;
-                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                        filePath = saveFileDialog1.FileName;
+                        System.IO.File.WriteAllText(filePath, FileText.Text);
                     }
                     haveChanges = false;
                 }
@@ -231,13 +240,13 @@ namespace Lessons
                 {
                     try
                     {
-                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                        System.IO.File.WriteAllText(filePath, FileText.Text);
                     }
                     catch
                     {
                         if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-                        fileName = saveFileDialog1.FileName;
-                        System.IO.File.WriteAllText(fileName, FileText.Text);
+                        filePath = saveFileDialog1.FileName;
+                        System.IO.File.WriteAllText(filePath, FileText.Text);
                     }
                     haveChanges = false;
                     FileText.Text = "";
@@ -245,8 +254,9 @@ namespace Lessons
                 else if (message == DialogResult.No)
                 {
                     FileText.Text = "";
+                    fileName = "Новый текстовый документ";
+                    this.Text = fileName + " - Блокнотик";
                 }
-                FileText.Text = "";
             }
         }
 
