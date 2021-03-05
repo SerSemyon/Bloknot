@@ -14,10 +14,13 @@ namespace Lessons
     {
         string filePath;
         string fileName;
+        string pastText;
+        string nextText;
         int line;
         int indexInLine;
         bool enableStatusSrip = true;
-        bool haveChanges;
+        bool haveChangesFile;
+        int haveChangesText = 0;
         public Form1()
         {
             InitializeComponent();
@@ -34,20 +37,44 @@ namespace Lessons
                 fileName = lastPath[0];
                 if (lastPath[lastPath.Length - 1] != "txt")
                 {
-                    MessageBox.Show("Данный формат файла не поддерживается программой");
-                    filePath = "";
+                    DialogResult message = MessageBox.Show("Данный формат файла не поддерживается программой", "Открыть файл ?", MessageBoxButtons.YesNoCancel);
+                    if (message == DialogResult.No)
+                    {
+                        filePath = "";
+                        ChangeStripStatus();
+                    }
+                    else
+                    {
+                        this.Text = fileName + " - Блокнотик";
+                        FileText.Text = System.IO.File.ReadAllText(filePath);
+                        ChangeStripStatus();
+                    }
                 }
                 else
                 {
                     this.Text = fileName + " - Блокнотик";
                     FileText.Text = System.IO.File.ReadAllText(filePath);
+                    ChangeStripStatus();
                 }
             }
             catch 
             {
                 fileName = "Новый текстовый документ";
                 this.Text = fileName + " - Блокнотик";
+                ChangeStripStatus();
             }
+        }
+        public void ChangeText(string newText)
+        {
+            pastText = FileText.Text;
+            FileText.Text = newText;
+            haveChangesText = 1;
+        }
+        void ChangeStripStatus()
+        {
+            line = 1 + Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
+            indexInLine = 1 + Convert.ToInt32(FileText.SelectionStart) - Convert.ToInt32(FileText.GetFirstCharIndexFromLine(line - 1));
+            toolStripStatusLabel1.Text = "Строка " + line + " Столбец " + indexInLine;
         }
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
@@ -59,7 +86,7 @@ namespace Lessons
             try
             {
                 System.IO.File.WriteAllText(filePath, FileText.Text);
-                haveChanges = false;
+                haveChangesFile = false;
             }
             catch
             {
@@ -74,7 +101,7 @@ namespace Lessons
             fileName = wholeFilePath[wholeFilePath.Length - 1].Split('.')[0];
             this.Text = fileName + " - Блокнотик";
             System.IO.File.WriteAllText(filePath, FileText.Text);
-            haveChanges = false;
+            haveChangesFile = false;
         }
 
 
@@ -85,15 +112,14 @@ namespace Lessons
             FileText.Text = System.IO.File.ReadAllText(filePath);
             fileName = openFileDialog1.SafeFileName.Split('.')[0];
             this.Text = fileName + " - Блокнотик";
-            haveChanges = false;
+            haveChangesFile = false;
         }
 
         private void FileText_TextChanged(object sender, EventArgs e)
         {
-            line = 1+Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
-            indexInLine = 1+Convert.ToInt32(FileText.SelectionStart) - Convert.ToInt32(FileText.GetFirstCharIndexFromLine(line-1));
-            toolStripStatusLabel1.Text = "Строка " + line + " Столбец " + indexInLine;
-            haveChanges = true;
+            ChangeStripStatus();
+            haveChangesFile = true;
+            haveChangesText = 0;
         }
 
 
@@ -140,12 +166,26 @@ namespace Lessons
 
         private void UndoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileText.Undo();
+            if (haveChangesText == 1)
+            {
+                nextText = FileText.Text;
+                FileText.Text = pastText;
+                haveChangesText = -1;
+            }
+            else
+                FileText.Undo();
         }
 
         private void RedoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FileText.Redo();
+            if (haveChangesText == -1)
+            {
+                pastText = FileText.Text;
+                FileText.Text = nextText;
+                haveChangesText = 1;
+            }
+            else
+                FileText.Redo();
         }
 
         private void PrintToolStripMenuItem_Click(object sender, EventArgs e)
@@ -200,7 +240,7 @@ namespace Lessons
 
         private void SearchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SearchForm search = new SearchForm();
+            SearchForm search = new SearchForm(this);
             search.richText = FileText;
             search.Owner = this;
             search.Show();
@@ -219,7 +259,7 @@ namespace Lessons
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (haveChanges == true)
+            if (haveChangesFile == true)
             {
                 DialogResult message = MessageBox.Show("Сохранить текущий документ перед выходом?", "Выход из программы", MessageBoxButtons.YesNoCancel);
                 if (message == DialogResult.Yes)
@@ -251,7 +291,7 @@ namespace Lessons
 
         private void CreateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (haveChanges == true)
+            if (haveChangesFile == true)
             {
                 DialogResult message = MessageBox.Show("Сохранить текущий документ перед выходом?", "Файл не сохранён", MessageBoxButtons.YesNoCancel);
                 if (message == DialogResult.Yes)
@@ -266,7 +306,7 @@ namespace Lessons
                         filePath = saveFileDialog1.FileName;
                         System.IO.File.WriteAllText(filePath, FileText.Text);
                     }
-                    haveChanges = false;
+                    haveChangesFile = false;
                     FileText.Text = "";
                 }
                 else if (message == DialogResult.No)
@@ -303,9 +343,9 @@ namespace Lessons
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void FileText_SelectionChanged(object sender, EventArgs e)
         {
-
+            ChangeStripStatus();
         }
     }
 }

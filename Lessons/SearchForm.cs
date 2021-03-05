@@ -13,8 +13,10 @@ namespace Lessons
     public partial class SearchForm : Form
     {
         public RichTextBox richText;
-        public SearchForm()
+        Form1 baseForm;
+        public SearchForm(Form1 form)
         {
+            baseForm = form;
             InitializeComponent();
         }
         void ChangeText()
@@ -23,7 +25,7 @@ namespace Lessons
             int lengthBegin = richText.Text.Length - textBox1.Text.Length - index;
             string strBegin = richText.Text.Substring(0, index);
             string strEnd = richText.Text.Substring(index + textBox1.Text.Length, lengthBegin);
-            richText.Text = strBegin + textBox2.Text + strEnd;
+            baseForm.ChangeText(strBegin + textBox2.Text + strEnd);
         }
 
         private void button1_Click(object sender, EventArgs e)

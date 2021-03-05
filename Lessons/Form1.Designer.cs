@@ -317,6 +317,7 @@ namespace Lessons
             this.FileText.Size = new System.Drawing.Size(794, 419);
             this.FileText.TabIndex = 2;
             this.FileText.Text = "";
+            this.FileText.SelectionChanged += new System.EventHandler(this.FileText_SelectionChanged);
             this.FileText.TextChanged += new System.EventHandler(this.FileText_TextChanged);
             // 
             // printDialog1
@@ -354,7 +355,6 @@ namespace Lessons
             this.Name = "Form1";
             this.Text = "Блокнотик";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
