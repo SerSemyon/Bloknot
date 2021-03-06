@@ -57,6 +57,7 @@ namespace Lessons
             this.ReadOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.EncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileText = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
@@ -64,7 +65,6 @@ namespace Lessons
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.EncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -74,7 +74,6 @@ namespace Lessons
             // 
             this.openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             this.openFileDialog1.Title = "Открыть .txt файл";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
             // 
             // tableLayoutPanel1
             // 
@@ -311,6 +310,13 @@ namespace Lessons
             this.ReferenceToolStripMenuItem.Text = "Справка";
             this.ReferenceToolStripMenuItem.Click += new System.EventHandler(this.ReferenceToolStripMenuItem_Click);
             // 
+            // EncodingToolStripMenuItem
+            // 
+            this.EncodingToolStripMenuItem.Name = "EncodingToolStripMenuItem";
+            this.EncodingToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.EncodingToolStripMenuItem.Text = "Смена кодировки";
+            this.EncodingToolStripMenuItem.Click += new System.EventHandler(this.EncodingToolStripMenuItem_Click);
+            // 
             // FileText
             // 
             this.FileText.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -348,13 +354,6 @@ namespace Lessons
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
-            // 
-            // EncodingToolStripMenuItem
-            // 
-            this.EncodingToolStripMenuItem.Name = "EncodingToolStripMenuItem";
-            this.EncodingToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-            this.EncodingToolStripMenuItem.Text = "Смена кодировки";
-            this.EncodingToolStripMenuItem.Click += new System.EventHandler(this.EncodingToolStripMenuItem_Click);
             // 
             // Form1
             // 

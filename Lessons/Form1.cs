@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -67,10 +68,6 @@ namespace Lessons
             pastText = FileText.Text;
             FileText.Text = newText;
             haveChangesText = 1;
-        }
-        private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
-        {
-
         }
 
         void SaveFile()
@@ -237,10 +234,6 @@ namespace Lessons
             search.Show();
         }
 
-        private void statusStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
 
         private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -343,7 +336,7 @@ namespace Lessons
 
         private void EncodingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.Default);
         }
     }
 }
