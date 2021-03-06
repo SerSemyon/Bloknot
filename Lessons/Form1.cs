@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Блокнотик.Properties;
 
 namespace Lessons
 {
@@ -237,8 +238,12 @@ namespace Lessons
 
         private void FontToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fontDialog1.ShowDialog() == DialogResult.Cancel) return;
-            FileText.Font = fontDialog1.Font;
+            if (fontDialog1.ShowDialog() == DialogResult.OK)
+            {
+                FileText.Font = fontDialog1.Font;
+                Settings.Default.Font = FileText.Font;
+                Settings.Default.Save();
+            }
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -316,14 +321,16 @@ namespace Lessons
 
         private void enableStatusStringToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (enableStatusSrip) {
+            if (!Settings.Default.statusStripDisabled) {
                 statusStrip1.Hide();
-                enableStatusSrip = false;
+                Settings.Default.statusStripDisabled = true;
+                Settings.Default.Save();
             }
             else
             {
                 statusStrip1.Show();
-                enableStatusSrip = true;
+                Settings.Default.statusStripDisabled = false;
+                Settings.Default.Save();
             }
         }
 
@@ -337,6 +344,12 @@ namespace Lessons
         private void EncodingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.Default);
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            FileText.Font = Settings.Default.Font;
+            if (Settings.Default.statusStripDisabled) statusStrip1.Hide();
         }
     }
 }
