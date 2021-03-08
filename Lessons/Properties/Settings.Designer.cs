@@ -45,17 +45,5 @@ namespace Блокнотик.Properties {
                 this["statusStripEnabled"] = value;
             }
         }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool counterVowelEnabled {
-            get {
-                return ((bool)(this["counterVowelEnabled"]));
-            }
-            set {
-                this["counterVowelEnabled"] = value;
-            }
-        }
     }
 }

@@ -21,11 +21,11 @@ namespace Lessons
         int encodingFile = 0;
         int line;
         int indexInLine;
-        int indexSelectLine;
-        bool counterVowelEnabled;
         bool statusStripEnabled;
         bool haveChangesFile = false;
         int haveChangesText = 0;
+        int[] numbVowel;
+        bool wasNumbVowel;
         public Form1()
         {
             InitializeComponent();
@@ -99,6 +99,7 @@ namespace Lessons
             pastText = FileText.Text;
             FileText.Text = newText;
             haveChangesText = 1;
+            haveChangesFile = true;
         }
 
         void SaveFile()
@@ -128,15 +129,22 @@ namespace Lessons
 
         private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            if (haveChangesFile)
+            {
+                DialogResult message = MessageBox.Show("Сохранить текущий документ?", "Файл не сохранён", MessageBoxButtons.YesNoCancel);
+                if (message == DialogResult.Yes)
+                {
+                    SaveFile();
+                }
+            }
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
             filePath = openFileDialog1.FileName;
             fileName = openFileDialog1.SafeFileName.Split('.')[0];
             ReadFile();
         }
-        string CountVowelInString(string line)
+        void CountVowelInString(ref string line, out int numb)
         {
-            line=line.ToLower();
-            int value = 0;
+            numb = 0;
             char[] charLine = line.ToCharArray();
             foreach (char n in charLine)
             {
@@ -158,38 +166,33 @@ namespace Lessons
                     case 'o':
                     case 'i':
                     case 'y':
-                        value++;
+                    case 'О':
+                    case 'Е':
+                    case 'А':
+                    case 'И':
+                    case 'У':
+                    case 'Я':
+                    case 'Ы':
+                    case 'Ю':
+                    case 'Э':
+                    case 'Ё':
+                    case 'A':
+                    case 'U':
+                    case 'E':
+                    case 'O':
+                    case 'I':
+                    case 'Y':
+                        numb++;
                         break;
                 }
             }
-            return Convert.ToString(value);
+            if (numb != 0)
+                line += " " + numb;
         }
         private void FileText_TextChanged(object sender, EventArgs e)
         {
             haveChangesFile = true;
             haveChangesText = 0;
-            indexSelectLine = Convert.ToInt32(FileText.GetLineFromCharIndex(FileText.SelectionStart));
-
-            
-            if (FileText.Lines.Length == CounterVowel.Lines.Length)
-            {
-                string[] txt = CounterVowel.Text.Split('\n');
-                CounterVowel.Text = "";
-                for (int i = 0; i < txt.Length; i++)
-                {
-                    if (i == indexSelectLine) CounterVowel.Text += CountVowelInString(FileText.Lines[i])+ "\n";
-                    else CounterVowel.Text += txt[i] + "\n";
-                }
-            }
-            else
-            {
-                CounterVowel.Text = "";
-                for (int i = 0; i < FileText.Lines.Length; i++)
-                {
-                    CounterVowel.Text += CountVowelInString(FileText.Lines[i]) + "\n";
-                }
-            }
-
         }
 
 
@@ -292,11 +295,13 @@ namespace Lessons
             if (FileText.ReadOnly)
             {
                 FileText.ReadOnly = false;
+                this.Text = fileName + " - Блокнотик";
                 ReadOnlyToolStripMenuItem.Text = "Запретить редактирование";
             }
             else
             {
                 FileText.ReadOnly = true;
+                this.Text = fileName + "(только для чтения) - Блокнотик";
                 ReadOnlyToolStripMenuItem.Text = "Разрешить редактирование";
             }
         }
@@ -322,7 +327,6 @@ namespace Lessons
             if (fontDialog1.ShowDialog() == DialogResult.OK)
             {
                 FileText.Font = fontDialog1.Font;
-                CounterVowel.Font = FileText.Font;
                 Settings.Default.Font = FileText.Font;
                 Settings.Default.Save();
             }
@@ -343,7 +347,6 @@ namespace Lessons
                 }
             }
             Settings.Default.statusStripEnabled = statusStripEnabled;
-            Settings.Default.counterVowelEnabled = counterVowelEnabled;
             Settings.Default.Save();
         }
 
@@ -356,6 +359,7 @@ namespace Lessons
             gotoform.textFind = FileText;
             gotoform.ShowDialog();
         }
+
 
         private void CreateToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -415,14 +419,7 @@ namespace Lessons
         private void Form1_Load(object sender, EventArgs e)
         {
             FileText.Font = Settings.Default.Font;
-            CounterVowel.Font = Settings.Default.Font;
-            counterVowelEnabled = Settings.Default.counterVowelEnabled;
             statusStripEnabled = Settings.Default.statusStripEnabled;
-            if (!counterVowelEnabled)
-            {
-                CounterVowel.Hide();
-                tableLayoutPanel1.ColumnCount -= 1;
-            }
             if (!statusStripEnabled)
             {
                 tableLayoutPanel1.RowCount -= 1;
@@ -502,24 +499,46 @@ namespace Lessons
             ReadOtherEncoding(4);
         }
 
-        private void counterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (counterVowelEnabled)
-            {
-                CounterVowel.Hide();
-                tableLayoutPanel1.ColumnCount -= 1;
-                counterVowelEnabled = false;
-            }
-            else
-            {
-                CounterVowel.Show();
-                tableLayoutPanel1.ColumnCount += 1;
-                counterVowelEnabled = true;
-            }
-        }
-
         private void FileText_VScroll(object sender, EventArgs e)
         {
+        }
+
+        private void CounterVowelToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (wasNumbVowel)
+                EraseNumber();
+            string[] lineText = FileText.Text.Split('\n');
+            numbVowel = new int[lineText.Length];
+            string newText = "";
+            CountVowelInString(ref lineText[0], out numbVowel[0]);
+            newText += lineText[0];
+            for (int i = 1; i<lineText.Length; i++)
+            {
+                CountVowelInString(ref lineText[i], out numbVowel[i]);
+                newText += '\n'+lineText[i];
+            }
+            ChangeText(newText);
+            wasNumbVowel = true;
+        }
+        void EraseNumber ()
+        {
+            string[] lineText = FileText.Text.Split('\n');
+            string newText = "";
+            newText += lineText[0].Replace(Convert.ToString(" "+numbVowel[0]), "");
+            for (int i = 1; i < lineText.Length; i++)
+            {
+                CountVowelInString(ref lineText[i], out numbVowel[i]);
+                newText += '\n' + lineText[i].Replace(Convert.ToString(" " + numbVowel[i]), "");
+            }
+            ChangeText(newText);
+
+        }
+        private void EraseNumberToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (wasNumbVowel)
+            {
+                EraseNumber();
+            }
         }
     }
 }
