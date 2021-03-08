@@ -21,7 +21,7 @@ namespace Lessons
         int encodingFile = 0;
         int line;
         int indexInLine;
-        bool haveChangesFile;
+        bool haveChangesFile = false;
         int haveChangesText = 0;
         public Form1()
         {
@@ -313,6 +313,7 @@ namespace Lessons
                     fileName = "Новый текстовый документ";
                     this.Text = fileName + " - Блокнотик";
                     toolStripStatusLabel2.Text = "Кодировка по умолчанию";
+                    haveChangesFile = false;
                 }
             }
             else
@@ -321,6 +322,7 @@ namespace Lessons
                 filePath = "";
                 FileText.Text = "";
                 this.Text = fileName + " - Блокнотик";
+                haveChangesFile = false;
             }
         }
 
