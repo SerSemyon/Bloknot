@@ -54,14 +54,17 @@ namespace Lessons
             this.GoToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.VidToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.enableStatusStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.counterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReadOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.readOtherEncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aNSIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aSCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unicodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileText = new System.Windows.Forms.RichTextBox();
+            this.CounterVowel = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
@@ -69,7 +72,6 @@ namespace Lessons
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
-            this.readOtherEncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -83,18 +85,20 @@ namespace Lessons
             // tableLayoutPanel1
             // 
             this.tableLayoutPanel1.AutoSize = true;
-            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
             this.tableLayoutPanel1.Controls.Add(this.menuStrip1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.FileText, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.CounterVowel, 1, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 25F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(800, 450);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(816, 439);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // menuStrip1
@@ -107,7 +111,8 @@ namespace Lessons
             this.EncodingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.menuStrip1.Size = new System.Drawing.Size(766, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -281,6 +286,7 @@ namespace Lessons
             // 
             this.VidToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.enableStatusStringToolStripMenuItem,
+            this.counterToolStripMenuItem,
             this.ReadOnlyToolStripMenuItem});
             this.VidToolStripMenuItem.Name = "VidToolStripMenuItem";
             this.VidToolStripMenuItem.Size = new System.Drawing.Size(79, 20);
@@ -292,6 +298,13 @@ namespace Lessons
             this.enableStatusStringToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
             this.enableStatusStringToolStripMenuItem.Text = "Строка состояния";
             this.enableStatusStringToolStripMenuItem.Click += new System.EventHandler(this.enableStatusStringToolStripMenuItem_Click);
+            // 
+            // counterToolStripMenuItem
+            // 
+            this.counterToolStripMenuItem.Name = "counterToolStripMenuItem";
+            this.counterToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
+            this.counterToolStripMenuItem.Text = "Счётчик слогов";
+            this.counterToolStripMenuItem.Click += new System.EventHandler(this.counterToolStripMenuItem_Click);
             // 
             // ReadOnlyToolStripMenuItem
             // 
@@ -318,6 +331,13 @@ namespace Lessons
             this.EncodingToolStripMenuItem.Name = "EncodingToolStripMenuItem";
             this.EncodingToolStripMenuItem.Size = new System.Drawing.Size(189, 20);
             this.EncodingToolStripMenuItem.Text = "Прочитать в другой кодировке";
+            // 
+            // readOtherEncodingToolStripMenuItem
+            // 
+            this.readOtherEncodingToolStripMenuItem.Name = "readOtherEncodingToolStripMenuItem";
+            this.readOtherEncodingToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.readOtherEncodingToolStripMenuItem.Text = "Следующая кодировка";
+            this.readOtherEncodingToolStripMenuItem.Click += new System.EventHandler(this.readOtherEncodingToolStripMenuItem_Click);
             // 
             // aNSIToolStripMenuItem
             // 
@@ -352,11 +372,24 @@ namespace Lessons
             this.FileText.Dock = System.Windows.Forms.DockStyle.Fill;
             this.FileText.Location = new System.Drawing.Point(3, 28);
             this.FileText.Name = "FileText";
-            this.FileText.Size = new System.Drawing.Size(794, 419);
+            this.FileText.Size = new System.Drawing.Size(760, 388);
             this.FileText.TabIndex = 2;
             this.FileText.Text = "";
+            this.FileText.WordWrap = false;
             this.FileText.SelectionChanged += new System.EventHandler(this.FileText_SelectionChanged);
+            this.FileText.VScroll += new System.EventHandler(this.FileText_VScroll);
             this.FileText.TextChanged += new System.EventHandler(this.FileText_TextChanged);
+            // 
+            // CounterVowel
+            // 
+            this.CounterVowel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.CounterVowel.Location = new System.Drawing.Point(769, 28);
+            this.CounterVowel.Name = "CounterVowel";
+            this.CounterVowel.ReadOnly = true;
+            this.CounterVowel.Size = new System.Drawing.Size(44, 388);
+            this.CounterVowel.TabIndex = 3;
+            this.CounterVowel.Text = "";
+            this.CounterVowel.WordWrap = false;
             // 
             // saveFileDialog1
             // 
@@ -375,9 +408,9 @@ namespace Lessons
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
             this.toolStripStatusLabel2});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 428);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 417);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(800, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(816, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -391,22 +424,16 @@ namespace Lessons
             this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
             this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
             // 
-            // readOtherEncodingToolStripMenuItem
-            // 
-            this.readOtherEncodingToolStripMenuItem.Name = "readOtherEncodingToolStripMenuItem";
-            this.readOtherEncodingToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
-            this.readOtherEncodingToolStripMenuItem.Text = "Следующая кодировка";
-            this.readOtherEncodingToolStripMenuItem.Click += new System.EventHandler(this.readOtherEncodingToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(816, 439);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.MinimumSize = new System.Drawing.Size(200, 250);
             this.Name = "Form1";
             this.Text = "Блокнотик";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -463,6 +490,8 @@ namespace Lessons
         private System.Windows.Forms.ToolStripMenuItem unicodeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem uTF8ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem readOtherEncodingToolStripMenuItem;
+        private System.Windows.Forms.RichTextBox CounterVowel;
+        private System.Windows.Forms.ToolStripMenuItem counterToolStripMenuItem;
     }
 }
 

@@ -37,12 +37,24 @@ namespace Блокнотик.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool statusStripDisabled {
+        public bool statusStripEnabled {
             get {
-                return ((bool)(this["statusStripDisabled"]));
+                return ((bool)(this["statusStripEnabled"]));
             }
             set {
-                this["statusStripDisabled"] = value;
+                this["statusStripEnabled"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool counterVowelEnabled {
+            get {
+                return ((bool)(this["counterVowelEnabled"]));
+            }
+            set {
+                this["counterVowelEnabled"] = value;
             }
         }
     }
