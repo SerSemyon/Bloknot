@@ -20,7 +20,6 @@ C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.Form1.resources
 C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.FormFind.resources
 C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.GoToForm.resources
 C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Блокнотик.Properties.Resources.resources
-C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.Reference.resources
 C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.SearchForm.resources
 C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.csproj.GenerateResource.cache
 C:\Users\serow\source\repos\Bloknot\Lessons\obj\Debug\Lessons.csproj.CoreCompileInputs.cache

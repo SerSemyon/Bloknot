@@ -56,15 +56,20 @@ namespace Lessons
             this.enableStatusStringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ReadOnlyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ReferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.EncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aNSIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aSCIToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.unicodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uTF8ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.FileText = new System.Windows.Forms.RichTextBox();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
             this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
+            this.readOtherEncodingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -99,7 +104,6 @@ namespace Lessons
             this.PravkaToolStripMenuItem,
             this.VidToolStripMenuItem,
             this.FontToolStripMenuItem,
-            this.ReferenceToolStripMenuItem,
             this.EncodingToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
@@ -303,19 +307,45 @@ namespace Lessons
             this.FontToolStripMenuItem.Text = "Шрифт";
             this.FontToolStripMenuItem.Click += new System.EventHandler(this.FontToolStripMenuItem_Click);
             // 
-            // ReferenceToolStripMenuItem
-            // 
-            this.ReferenceToolStripMenuItem.Name = "ReferenceToolStripMenuItem";
-            this.ReferenceToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.ReferenceToolStripMenuItem.Text = "Справка";
-            this.ReferenceToolStripMenuItem.Click += new System.EventHandler(this.ReferenceToolStripMenuItem_Click);
-            // 
             // EncodingToolStripMenuItem
             // 
+            this.EncodingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.readOtherEncodingToolStripMenuItem,
+            this.aNSIToolStripMenuItem,
+            this.aSCIToolStripMenuItem,
+            this.unicodeToolStripMenuItem,
+            this.uTF8ToolStripMenuItem});
             this.EncodingToolStripMenuItem.Name = "EncodingToolStripMenuItem";
-            this.EncodingToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-            this.EncodingToolStripMenuItem.Text = "Смена кодировки";
-            this.EncodingToolStripMenuItem.Click += new System.EventHandler(this.EncodingToolStripMenuItem_Click);
+            this.EncodingToolStripMenuItem.Size = new System.Drawing.Size(189, 20);
+            this.EncodingToolStripMenuItem.Text = "Прочитать в другой кодировке";
+            // 
+            // aNSIToolStripMenuItem
+            // 
+            this.aNSIToolStripMenuItem.Name = "aNSIToolStripMenuItem";
+            this.aNSIToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.aNSIToolStripMenuItem.Text = "ANSI";
+            this.aNSIToolStripMenuItem.Click += new System.EventHandler(this.aNSIToolStripMenuItem_Click);
+            // 
+            // aSCIToolStripMenuItem
+            // 
+            this.aSCIToolStripMenuItem.Name = "aSCIToolStripMenuItem";
+            this.aSCIToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.aSCIToolStripMenuItem.Text = "ASCII";
+            this.aSCIToolStripMenuItem.Click += new System.EventHandler(this.aSCIToolStripMenuItem_Click);
+            // 
+            // unicodeToolStripMenuItem
+            // 
+            this.unicodeToolStripMenuItem.Name = "unicodeToolStripMenuItem";
+            this.unicodeToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.unicodeToolStripMenuItem.Text = "Unicode";
+            this.unicodeToolStripMenuItem.Click += new System.EventHandler(this.unicodeToolStripMenuItem_Click);
+            // 
+            // uTF8ToolStripMenuItem
+            // 
+            this.uTF8ToolStripMenuItem.Name = "uTF8ToolStripMenuItem";
+            this.uTF8ToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.uTF8ToolStripMenuItem.Text = "UTF-8";
+            this.uTF8ToolStripMenuItem.Click += new System.EventHandler(this.uTF8ToolStripMenuItem_Click);
             // 
             // FileText
             // 
@@ -343,7 +373,8 @@ namespace Lessons
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripStatusLabel1});
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
@@ -354,6 +385,18 @@ namespace Lessons
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 17);
+            // 
+            // readOtherEncodingToolStripMenuItem
+            // 
+            this.readOtherEncodingToolStripMenuItem.Name = "readOtherEncodingToolStripMenuItem";
+            this.readOtherEncodingToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
+            this.readOtherEncodingToolStripMenuItem.Text = "Следующая кодировка";
+            this.readOtherEncodingToolStripMenuItem.Click += new System.EventHandler(this.readOtherEncodingToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -413,8 +456,13 @@ namespace Lessons
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripMenuItem FontToolStripMenuItem;
         private System.Windows.Forms.FontDialog fontDialog1;
-        private System.Windows.Forms.ToolStripMenuItem ReferenceToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem EncodingToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+        private System.Windows.Forms.ToolStripMenuItem aNSIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aSCIToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem unicodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uTF8ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem readOtherEncodingToolStripMenuItem;
     }
 }
 

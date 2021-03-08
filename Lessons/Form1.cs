@@ -18,9 +18,9 @@ namespace Lessons
         string fileName;
         string pastText;
         string nextText;
+        int encodingFile = 0;
         int line;
         int indexInLine;
-        bool enableStatusSrip = true;
         bool haveChangesFile;
         int haveChangesText = 0;
         public Form1()
@@ -44,8 +44,7 @@ namespace Lessons
                     }
                     else if (message == DialogResult.Yes)
                     {
-                        this.Text = fileName + " - Блокнотик";
-                        FileText.Text = System.IO.File.ReadAllText(filePath);
+                        ReadFile();
                     }
                     else
                     {
@@ -54,15 +53,43 @@ namespace Lessons
                 }
                 else
                 {
-                    this.Text = fileName + " - Блокнотик";
-                    FileText.Text = System.IO.File.ReadAllText(filePath);
+                    ReadFile();
                 }
             }
             catch 
             {
                 fileName = "Новый текстовый документ";
                 this.Text = fileName + " - Блокнотик";
+                toolStripStatusLabel2.Text = "Кодировка по умолчанию";
             }
+        }
+        void ReadFile()
+        {
+            this.Text = fileName + " - Блокнотик";
+            switch (encodingFile)
+            {
+                case 0:
+                    FileText.Text = System.IO.File.ReadAllText(filePath);
+                    toolStripStatusLabel2.Text = "Кодировка по умолчанию";
+                    break;
+                case 1:
+                    FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.Default);
+                    toolStripStatusLabel2.Text = "Кодировка ANSI";
+                    break;
+                case 2:
+                    FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.ASCII);
+                    toolStripStatusLabel2.Text = "Кодировка ASCII";
+                    break;
+                case 3:
+                    FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.Unicode);
+                    toolStripStatusLabel2.Text = "Кодировка Unicode";
+                    break;
+                case 4:
+                    FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.UTF8);
+                    toolStripStatusLabel2.Text = "Кодировка UTF-8";
+                    break;
+            }
+            haveChangesFile = false;
         }
         public void ChangeText(string newText)
         {
@@ -76,6 +103,7 @@ namespace Lessons
             try
             {
                 System.IO.File.WriteAllText(filePath, FileText.Text);
+                toolStripStatusLabel2.Text = "Кодировка по умолчанию";
                 haveChangesFile = false;
             }
             catch
@@ -89,8 +117,8 @@ namespace Lessons
             filePath = saveFileDialog1.FileName;
             string[] wholeFilePath = saveFileDialog1.FileName.Split('\\');
             fileName = wholeFilePath[wholeFilePath.Length - 1].Split('.')[0];
-            this.Text = fileName + " - Блокнотик";
             System.IO.File.WriteAllText(filePath, FileText.Text);
+            toolStripStatusLabel2.Text = "Кодировка по умолчанию";
             haveChangesFile = false;
         }
 
@@ -99,10 +127,8 @@ namespace Lessons
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel) return;
             filePath = openFileDialog1.FileName;
-            FileText.Text = System.IO.File.ReadAllText(filePath);
             fileName = openFileDialog1.SafeFileName.Split('.')[0];
-            this.Text = fileName + " - Блокнотик";
-            haveChangesFile = false;
+            ReadFile();
         }
 
         private void FileText_TextChanged(object sender, EventArgs e)
@@ -272,12 +298,6 @@ namespace Lessons
             gotoform.ShowDialog();
         }
 
-        private void ReferenceToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Reference reference = new Reference();
-            reference.ShowDialog();
-        }
-
         private void CreateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (haveChangesFile == true)
@@ -285,24 +305,14 @@ namespace Lessons
                 DialogResult message = MessageBox.Show("Сохранить текущий документ перед выходом?", "Файл не сохранён", MessageBoxButtons.YesNoCancel);
                 if (message == DialogResult.Yes)
                 {
-                    try
-                    {
-                        System.IO.File.WriteAllText(filePath, FileText.Text);
-                    }
-                    catch
-                    {
-                        if (saveFileDialog1.ShowDialog() == DialogResult.Cancel) return;
-                        filePath = saveFileDialog1.FileName;
-                        System.IO.File.WriteAllText(filePath, FileText.Text);
-                    }
-                    haveChangesFile = false;
-                    FileText.Text = "";
+                    SaveFile();
                 }
                 else if (message == DialogResult.No)
                 {
                     FileText.Text = "";
                     fileName = "Новый текстовый документ";
                     this.Text = fileName + " - Блокнотик";
+                    toolStripStatusLabel2.Text = "Кодировка по умолчанию";
                 }
             }
             else
@@ -341,15 +351,82 @@ namespace Lessons
             toolStripStatusLabel1.Text = "Строка " + line + " Столбец " + indexInLine;
         }
 
-        private void EncodingToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            FileText.Text = System.IO.File.ReadAllText(filePath, Encoding.Default);
-        }
-
         private void Form1_Load(object sender, EventArgs e)
         {
             FileText.Font = Settings.Default.Font;
             if (Settings.Default.statusStripDisabled) statusStrip1.Hide();
+        }
+
+        void ReadOtherEncoding(int enc)
+        {
+            try
+            {
+                if (haveChangesFile)
+                {
+                    DialogResult mes = MessageBox.Show("При повторном чтении внесённые изменения будут потеряны. Продолжить?", "Файл был изменён", MessageBoxButtons.OKCancel);
+                    if (mes == DialogResult.OK)
+                    {
+                        encodingFile = enc;
+                        ReadFile();
+                    }
+                }
+                else
+                {
+                    encodingFile = enc;
+                    ReadFile();
+                }
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void readOtherEncodingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (haveChangesFile)
+                {
+                    DialogResult mes = MessageBox.Show("При повторном чтении внесённые изменения будут потеряны. Продолжить?", "Файл был изменён", MessageBoxButtons.OKCancel);
+                    if (mes == DialogResult.OK)
+                    {
+                        encodingFile = ++encodingFile%5;
+                        ReadFile();
+                    }
+                }
+                else
+                {
+                    encodingFile = ++encodingFile % 5;
+                    ReadFile();
+                }
+
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void aNSIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadOtherEncoding(1);
+        }
+
+        private void aSCIToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadOtherEncoding(2);
+        }
+
+        private void unicodeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadOtherEncoding(3);
+        }
+
+        private void uTF8ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ReadOtherEncoding(4);
         }
     }
 }
