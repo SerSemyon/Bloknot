@@ -93,6 +93,7 @@ namespace Lessons
                     break;
             }
             haveChangesFile = false;
+            wasNumbVowel = false;
         }
         public void ChangeText(string newText)
         {
@@ -109,6 +110,7 @@ namespace Lessons
                 System.IO.File.WriteAllText(filePath, FileText.Text);
                 toolStripStatusLabel2.Text = "Кодировка по умолчанию";
                 haveChangesFile = false;
+                this.Text = fileName + " - Блокнотик";
             }
             catch
             {
@@ -124,6 +126,7 @@ namespace Lessons
             System.IO.File.WriteAllText(filePath, FileText.Text);
             toolStripStatusLabel2.Text = "Кодировка по умолчанию";
             haveChangesFile = false;
+            this.Text = fileName + " - Блокнотик";
         }
 
 
@@ -194,7 +197,6 @@ namespace Lessons
             haveChangesFile = true;
             haveChangesText = 0;
         }
-
 
         private void SaveToolStripMenuItem_Click(object sender, EventArgs e)
         {
