@@ -384,7 +384,6 @@ namespace Lessons
             this.FileText.Text = "";
             this.FileText.WordWrap = false;
             this.FileText.SelectionChanged += new System.EventHandler(this.FileText_SelectionChanged);
-            this.FileText.VScroll += new System.EventHandler(this.FileText_VScroll);
             this.FileText.TextChanged += new System.EventHandler(this.FileText_TextChanged);
             // 
             // saveFileDialog1

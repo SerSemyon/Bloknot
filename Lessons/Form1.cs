@@ -501,10 +501,6 @@ namespace Lessons
             ReadOtherEncoding(4);
         }
 
-        private void FileText_VScroll(object sender, EventArgs e)
-        {
-        }
-
         private void CounterVowelToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (wasNumbVowel)
@@ -533,7 +529,7 @@ namespace Lessons
                 newText += '\n' + lineText[i].Replace(Convert.ToString(" " + numbVowel[i]), "");
             }
             ChangeText(newText);
-
+            wasNumbVowel = false;
         }
         private void EraseNumberToolStripMenuItem_Click(object sender, EventArgs e)
         {
