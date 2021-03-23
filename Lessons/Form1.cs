@@ -40,7 +40,7 @@ namespace Lessons
                 fileName = lastPath[0];
                 if (lastPath[lastPath.Length - 1] != "txt")
                 {
-                    DialogResult message = MessageBox.Show("Данный формат файла не поддерживается программой", "Открыть файл ?", MessageBoxButtons.YesNoCancel);
+                    DialogResult message = MessageBox.Show("Открыть файл ?", "Данный формат файла не поддерживается программой", MessageBoxButtons.YesNoCancel);
                     if (message == DialogResult.No)
                     {
                         filePath = "";
