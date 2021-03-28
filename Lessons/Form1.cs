@@ -47,7 +47,7 @@ namespace Lessons
                     }
                     else if (message == DialogResult.Yes)
                     {
-                        ReadFile();
+                        FileText.Layout += FileText_Layout; //читает файл после загрузки программы
                     }
                     else
                     {
@@ -56,7 +56,7 @@ namespace Lessons
                 }
                 else
                 {
-                    ReadFile();
+                    FileText.Layout += FileText_Layout; //читает файл после загрузки программы
                 }
             }
             catch 
@@ -537,6 +537,12 @@ namespace Lessons
             {
                 EraseNumber();
             }
+        }
+
+        private void FileText_Layout(object sender, LayoutEventArgs e)
+        {
+            ReadFile();
+            FileText.Layout -= FileText_Layout;
         }
     }
 }
